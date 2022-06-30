@@ -65,4 +65,20 @@ body .wrapper .memory_game .memory_card .front_face {
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
 }
+
+body .wrapper .memory_game .flip {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+body .wrapper .memory_game .flip .front_face {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+  -webkit-backface-visibility: visible;
+          backface-visibility: visible;
+}
+
+body .wrapper .memory_game .flip .back_face {
+  visibility: hidden;
+}
 /*# sourceMappingURL=style.css.map */

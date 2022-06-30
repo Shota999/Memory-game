@@ -43,7 +43,22 @@ body{
                 .front_face{
                     transform: rotateY(180deg);
                 }
+                
             }
+            .flip{
+                transform: rotateY(180deg);
+
+                .front_face{
+                    transform: rotateY(180deg);
+                    backface-visibility: visible;
+                }
+                .back_face{
+                    visibility: hidden;
+                }
+            }
+            // .flip{
+            //     transform: rotateY(180deg);
+            // }
         }
     }
 }
