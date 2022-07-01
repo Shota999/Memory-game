@@ -7,12 +7,15 @@ let boardLock = false;
 const flipCard = e => {
     if(boardLock) return;
 
-    console.log(e.target.parentElement);
+    // console.log(e.target.parentElement);
+
     const target = e.target.parentElement;
+
+    if(target === firstCard) return;
 
     target.classList.add("flip");
 
-    console.log(target.dataset.framework);
+    // console.log(target.dataset.framework);
 
     if (!flippedCard){
 
@@ -28,7 +31,7 @@ const flipCard = e => {
 };
 const checkMatch = () =>{
     if(firstCard.dataset.framework === secondCard.dataset.framework){
-        console.log("123");
+        
         firstCard.removeEventListener("click" , flipCard);
         secondCard.removeEventListener("click" , flipCard);
     }else{
