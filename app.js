@@ -7,9 +7,6 @@ const data = ['angular', 'aurelia' , 'backbone' , 'ember' , 'react' , 'vue' ,'an
 
 const container = document.getElementById("memory_game");
 
-
-
-
 for ( let i = 0; i < data.length; i++){
  
     container.innerHTML += `<div class="memory_card" data-framework="${data[i]}">
