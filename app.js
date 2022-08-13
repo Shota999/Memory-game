@@ -1,14 +1,13 @@
-
 let flippedCard = false;
 let firstCard, secondCard;
 let boardLock = false;
 
-const data = ['angular', 'aurelia' , 'backbone' , 'ember' , 'react' , 'vue' ,'angular', 'aurelia' , 'backbone' , 'ember' , 'react' , 'vue'];
+const data = ['angular', 'aurelia', 'backbone', 'ember', 'react', 'vue', 'angular', 'aurelia', 'backbone', 'ember', 'react', 'vue'];
 
 const container = document.getElementById("memory_game");
 
-for ( let i = 0; i < data.length; i++){
- 
+for (let i = 0; i < data.length; i++) {
+
     container.innerHTML += `<div class="memory_card" data-framework="${data[i]}">
     <img src="images/${data[i]}.svg" alt="${data[i]}" class="front_face">
     <img src="images/js-badge.svg" alt="js-badge" class="back_face">
@@ -16,10 +15,19 @@ for ( let i = 0; i < data.length; i++){
 }
 const cards = document.querySelectorAll(".memory_card");
 
+const image = document.querySelector(".memory_card");
+
+window.onload = () => randomImage(data);
+function randomImage(array){
+    let randomNum = Math.floor(Math.random() * array.length); 
+    image.setAttribute("data-framework", array[randomNum]);
+}
+
+
 const flipCard = e => {
     if (boardLock) return;
 
-    console.log(e.target.parentElement);
+    // console.log(e.target.parentElement);
     const target = e.target.parentElement;
 
     target.classList.add("flip");
