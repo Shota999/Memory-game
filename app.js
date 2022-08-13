@@ -11,14 +11,12 @@ window.onload = () => randomImage(data);
 const randomImage = (data) =>{
     for (let i = 0; i < data.length; i++) {
         let randomNum = Math.floor(Math.random() * data.length);
-        container.innerHTML += `<div class="memory_card" data-framework="${data[i]}">
+        container.innerHTML += `<div class="memory_card" data-framework="${data[randomNum]}">
         <img src="images/${data[randomNum]}.svg" alt="${data[randomNum]}" class="front_face">
         <img src="images/js-badge.svg" alt="js-badge" class="back_face">
         </div>`;
     }
-};
-
-const cards = document.querySelectorAll(".memory_card");
+    const cards = document.querySelectorAll(".memory_card");
 
 const flipCard = e => {
     if (boardLock) return;
@@ -63,3 +61,5 @@ const checkMatch = () => {
 cards.forEach(card => {
     card.addEventListener("click", flipCard)
 })
+};
+
