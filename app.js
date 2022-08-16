@@ -7,10 +7,11 @@ let boardLock = false;
 const flipCard = e => {
     if(boardLock) return;
 
-    // console.log(e.target.parentElement);
+    console.log(e.target.parentElement);
 
     const target = e.target.parentElement;
-
+    console.log({target});
+    console.log({firstCard});
     if(target === firstCard) return;
 
     target.classList.add("flip");
@@ -42,6 +43,7 @@ const checkMatch = () =>{
             secondCard.classList.remove("flip");
 
             boardLock = false;
+            firstCard = null;
         }, 800);
     }
 };
