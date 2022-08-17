@@ -2,74 +2,70 @@ let flippedCard = false;
 let firstCard, secondCard;
 let boardLock = false;
 
+
 const data = ['angular', 'aurelia', 'backbone', 'ember', 'react', 'vue', 'angular', 'aurelia', 'backbone', 'ember', 'react', 'vue'];
 const container = document.getElementById("memory_game");
 
 
 window.onload = () => randomImage(data);
-
-const randomImage = (data) =>{
+const exit=[];
+let randomNum = null;
+const randomImage = (data) => {
     for (let i = 0; i < data.length; i++) {
-        let randomNum = Math.floor(Math.random() * data.length);
-        container.innerHTML += `<div class="memory_card" data-framework="${data[randomNum]}">
-        <img src="images/${data[randomNum]}.svg" alt="${data[randomNum]}" class="front_face">
-        <img src="images/js-badge.svg" alt="js-badge" class="back_face">
-        </div>`;
-    }}
+        var k = randomNum;
+        exit.push(k);
+        randomNum = Math.floor(Math.random() * data.length);
+        if(!exit.includes(randomNum)){
+            container.innerHTML += `<div class="memory_card" data-framework="${data[randomNum]}">
+            <img src="images/${data[randomNum]}.svg" alt="${data[randomNum]}" class="front_face">
+            <img src="images/js-badge.svg" alt="js-badge" class="back_face">
+            </div>`;
+        }
+    }
+
+
     const cards = document.querySelectorAll(".memory_card");
+    const flipCard = e => {
+        if (boardLock) return;
 
-const flipCard = e => {
-    if (boardLock) return;
+        console.log(e.target.parentElement);
+        const target = e.target.parentElement;
 
-    console.log(e.target.parentElement);
+        target.classList.add("flip");
 
-    const target = e.target.parentElement;
-    console.log({target});
-    console.log({firstCard});
-    if(target === firstCard) return;
+        console.log(target.dataset.framework);
 
-    target.classList.add("flip");
+        if (!flippedCard) {
 
-    // console.log(target.dataset.framework);
+            flippedCard = true;
+            firstCard = target;
+        } else {
 
-    if (!flippedCard) {
+            flippedCard = false;
+            secondCard = target;
 
-        flippedCard = true;
-        firstCard = target;
-    } else {
+            checkMatch();
+        }
+    };
 
-        flippedCard = false;
-        secondCard = target;
+    const checkMatch = () => {
+        if (firstCard.dataset.framework === secondCard.dataset.framework) {
+            console.log("123");
+            firstCard.removeEventListener("click", flipCard);
+            secondCard.removeEventListener("click", flipCard);
+        } else {
+            boardLock = true;
 
-        checkMatch();
-    }
-};
-const checkMatch = () =>{
-    if(firstCard.dataset.framework === secondCard.dataset.framework){
-        
-        firstCard.removeEventListener("click" , flipCard);
-        secondCard.removeEventListener("click" , flipCard);
-    }
+            setTimeout(() => {
+                firstCard.classList.remove("flip");
+                secondCard.classList.remove("flip");
 
-const checkMatch = () => {
-    if (firstCard.dataset.framework === secondCard.dataset.framework) {
-        console.log("123");
-        firstCard.removeEventListener("click", flipCard);
-        secondCard.removeEventListener("click", flipCard);
-    } else {
-        boardLock = true;
+                boardLock = false;
+            }, 800);
+        }
+    };
 
-        setTimeout(() => {
-            firstCard.classList.remove("flip");
-            secondCard.classList.remove("flip");
-
-            boardLock = false;
-            firstCard = null;
-        }, 800);
-    }
-};
-
-cards.forEach(card => {
-    card.addEventListener("click", flipCard)
-})
+    cards.forEach(card => {
+        card.addEventListener("click", flipCard)
+    })
 };
