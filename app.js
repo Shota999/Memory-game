@@ -12,9 +12,10 @@ const exit=[];
 let randomNum = null;
 const randomImage = (data) => {
     for (let i = 0; i < data.length; i++) {
-        var k = randomNum;
+        const k = randomNum;
         exit.push(k);
         randomNum = Math.floor(Math.random() * data.length);
+
         if(!exit.includes(randomNum)){
             container.innerHTML += `<div class="memory_card" data-framework="${data[randomNum]}">
             <img src="images/${data[randomNum]}.svg" alt="${data[randomNum]}" class="front_face">
